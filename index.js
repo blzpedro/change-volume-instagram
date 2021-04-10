@@ -1,8 +1,7 @@
 function initSlider(){
     const awaitDiv = setInterval(() => {
         let position = document.querySelector("div.K_10X")
-        let hasVideo = document.querySelector("video")
-        if (position && hasVideo) {
+        if (position) {
             clearInterval(awaitDiv)
     
             //create volume slider with DOM
@@ -18,6 +17,7 @@ function initSlider(){
             volumeSlider.setAttribute('min', '0')
             volumeSlider.setAttribute('max', '100')
             volumeSlider.setAttribute('value', '100')
+            volumeContent.setAttribute('id', 'volumeContent')
             volumeContent.style.color = 'white'
             volumeContent.style.textAlign = 'center'
             volumeContent.innerHTML = 100 + '%'
@@ -30,34 +30,36 @@ function initSlider(){
                 visible ? volumeSlider.style.display = 'block' : volumeSlider.style.display = 'none'
                 visible ? volumeContent.style.display = 'block' : volumeContent.style.display = 'none'
             })
-        
+            
             //get slider value to change volume 
-            volumeSlider.addEventListener("change", ({ target }) => {
+            let idSlider = document.getElementById('volumeSlider')
+            idSlider ? idSlider.oninput = ({target}) => {
                 volume = target.value/100
-                setVolume(volume)
-                volumeContent.innerHTML = Math.round(volume*100) + '%'
-            });
-        
-            let hasSlider = document.getElementById('volumeSlider')
-            !hasSlider ? position.appendChild(divSlider) : null
+                volume ? setVolume(volume) : null
+            } : null
+            !idSlider ? position.appendChild(divSlider) : null
             
         }
     }, [1000]);
 }
 
-const eventStoriesChange = setInterval((e) => {
+const eventStoriesChange = setInterval(() => {
     //event for handle stories change and set value choosed from slider
     let contentStories = document.querySelector("div.qbCDp")
     let volumeSlider = document.getElementById('volumeSlider')
     let volume = volumeSlider ? volumeSlider.value : 0
     let tagsContent = contentStories ? contentStories.children : null
-    if(tagsContent && tagsContent.length == 4){
+    if(tagsContent){
         initSlider()
-        tagsContent[2].volume = volume/100
+        tagsContent.length == 4 ? tagsContent[2].volume = volume/100 : null
     }
-}, [500])
+}, [100])
   
 const setVolume = (volume) => {
-    const video = document.querySelector("video")
-    video.volume = volume
+    if(volume){
+        const video = document.querySelector("video")
+        let volumeContent = document.getElementById('volumeContent')
+        volumeContent.innerHTML = Math.round(volume*100) + '%'
+        video.volume = volume    
+    }
 };
