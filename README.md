@@ -77,7 +77,7 @@ Faça download do zip ou clone o repositório.
 
 ## Após a inclusão no seu browser:
 ```bash
-# Entre em um stories de vídeo.
+# Entre em um stories.
 # No canto superior possui um slider de volume para controlar o volume dos stories.
 # Arraste para aumentar ou diminuir o volume
 # Útil e de fácil entendimento.
