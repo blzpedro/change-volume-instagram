@@ -1,6 +1,6 @@
 function initSlider(){
     const awaitDiv = setInterval(() => {
-        let position = document.querySelector("div.K_10X")
+        let position = document.querySelector("div.aUIsh")
         if (position) {
             clearInterval(awaitDiv)
     
